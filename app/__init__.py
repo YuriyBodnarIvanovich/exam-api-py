@@ -17,8 +17,10 @@ def create_app(config_filename=None):
         if os.environ.get('DATABASE_URL') is None: # for local work
             app.config.update(SQLALCHEMY_DATABASE_URI = 'sqlite:///product.db', SECRET_KEY = 'alaxacbar')
         else: # for heroku work
-            os.environ.get('DATABASE_URL')
-            os.environ.get('SECRET_KEY ')
+            app.config.update(
+                SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL'),
+                SECRET_KEY = os.environ.get('SECRET_KEY')
+            )
         print(os.environ.get('DATABASE_URL'))
         db.init_app(app)
         # bcrypt.init_app(app)
